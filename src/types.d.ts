@@ -19,6 +19,21 @@ export interface FieldType {
 }
 
 declare const enum SEX {
-  MALE="MALE",
-  FEMALE="FEMALE"
+  MALE = "MALE",
+  FEMALE = "FEMALE",
 }
+
+declare const enum SNACK_SEVERITY {
+  ERROR = "error",
+  WARNING = "warning",
+  INFO = "info",
+  SUCCESS = "success",
+}
+declare type SnackBarMessageInputType = {
+  message: string;
+  severity?: SNACK_SEVERITY;
+};
+
+declare type SnackbarContextType = {
+  openSnackbar: (input: SnackBarMessageInputType) => void;
+};

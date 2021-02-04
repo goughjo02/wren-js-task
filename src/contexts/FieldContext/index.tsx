@@ -1,6 +1,13 @@
 import React, { createContext, useContext, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { FieldContextType, FieldType, SheepType, SEX } from "../../types";
+import {
+  FieldContextType,
+  FieldType,
+  SheepType,
+  SEX,
+  SNACK_SEVERITY,
+} from "../../types";
+import { useSnackbar } from "../SnackbarContext";
 
 export const generateNewSheep = (name: string) => {
   const newSheep: SheepType = {
@@ -26,6 +33,7 @@ export const FieldProvider: React.FC<{
   children: React.ReactNode;
   field: FieldType;
 }> = ({ children, field }) => {
+  const { openSnackbar } = useSnackbar();
   const { id, sheep: seedSheep } = field;
   const [sheep, setSheep] = useState<SheepType[]>([...seedSheep]);
   const addSheep = (name: string, sex?: SEX.MALE | SEX.FEMALE) => {
@@ -39,7 +47,11 @@ export const FieldProvider: React.FC<{
     setSheep((prevState) => {
       const unbrandedSheep = prevState.filter((e) => !e.branded);
       if (unbrandedSheep.length < 1) {
-        return [...prevState]
+        openSnackbar({
+          message: `There are no more unbranded sheep to brand`,
+          severity: SNACK_SEVERITY.ERROR,
+        });
+        return [...prevState];
       }
       const randomUnbrandedSheep =
         unbrandedSheep[Math.floor(Math.random() * unbrandedSheep.length)];
@@ -48,6 +60,10 @@ export const FieldProvider: React.FC<{
       );
       const newState = [...prevState];
       newState[indexOfRandomSheep].branded = true;
+      openSnackbar({
+        message: `Branded ${randomUnbrandedSheep.name}`,
+        severity: SNACK_SEVERITY.SUCCESS,
+      });
       return newState;
     });
   };
