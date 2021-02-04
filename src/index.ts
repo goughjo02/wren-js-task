@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
+import "./index.css"
+
 import { Root } from './root';
 
 function main() {
