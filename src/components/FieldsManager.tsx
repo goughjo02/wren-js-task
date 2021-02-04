@@ -61,8 +61,8 @@ const FieldsManager = () => {
           </FormHelperText>
         </FormControl>
         <div className="margin-y margin-left-auto">
-        <Button type="submit" variant="contained" color="primary">
-          Add Field
+        <Button type="submit" variant="contained" color="secondary">
+          Add New Field
         </Button>
         </div>
       </form>
