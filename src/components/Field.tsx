@@ -5,12 +5,15 @@ import SheepTable from "./SheepTable";
 import AddSheep from "./AddSheep";
 import BrandRandomSheep from "./BrandRandomSheep";
 import EncourageBreeding from "./EncourageBreeding";
+import { Container, Typography } from "@material-ui/core";
 
 const Field: React.FC<{ field: FieldType }> = ({ field }) => {
   const { id } = field;
   return (
     <div id={`field-${id}`}>
-      <h1>Field</h1>
+      <Container maxWidth="sm">
+        <Typography variant="h3">Field</Typography>
+      </Container>
       <FieldProvider field={field}>
         <AddSheep />
         <BrandRandomSheep />
