@@ -8,6 +8,7 @@ export interface SheepType {
 export interface FieldContextType {
   addSheep: (name: string, sex?: SEX) => void;
   brandRandomSheep: () => void;
+  encourageBreeding: () => void;
   id: string;
   sheep: SheepType[];
   setSheep: (sheep: SheepType[]) => void;
@@ -36,4 +37,5 @@ declare type SnackBarMessageInputType = {
 
 declare type SnackbarContextType = {
   openSnackbar: (input: SnackBarMessageInputType) => void;
+  setOpen: (open: boolean) => void;
 };

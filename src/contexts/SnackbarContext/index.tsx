@@ -9,6 +9,7 @@ import {
 
 const SnackBarContext = createContext<SnackbarContextType>({
   openSnackbar: ({}: SnackBarMessageInputType) => null,
+  setOpen: (_: boolean) => null
 });
 
 export const useSnackbar = () => useContext(SnackBarContext);
@@ -39,7 +40,7 @@ export const SnackbarProvider: React.FC<{
     setOpen(false);
   };
   return (
-    <SnackBarContext.Provider value={{ openSnackbar }}>
+    <SnackBarContext.Provider value={{ openSnackbar, setOpen }}>
       <>
         {children}
         <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>

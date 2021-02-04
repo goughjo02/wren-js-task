@@ -4,6 +4,7 @@ import { FieldProvider } from "../contexts/FieldContext";
 import SheepTable from "./SheepTable";
 import AddSheep from "./AddSheep";
 import BrandRandomSheep from "./BrandRandomSheep";
+import EncourageBreeding from "./EncourageBreeding";
 
 const Field: React.FC<{ field: FieldType }> = ({ field }) => {
   const { id } = field;
@@ -13,6 +14,7 @@ const Field: React.FC<{ field: FieldType }> = ({ field }) => {
       <FieldProvider field={field}>
         <AddSheep />
         <BrandRandomSheep />
+        <EncourageBreeding />
         <SheepTable />
       </FieldProvider>
     </div>
