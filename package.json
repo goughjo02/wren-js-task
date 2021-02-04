@@ -2,9 +2,13 @@
   "name": "starter_app",
   "version": "1.0.0",
   "description": "Wren Kitchens Starter Application",
+  "homepage": "https://goughjo02.github.io/wren-js-task/",
   "main": "./dist/index.js",
   "scripts": {
-    "start": "webpack-dev-server --config ./config/webpack.config.js --open"
+    "start": "webpack-dev-server --config ./config/webpack.config.js --open",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
+    "build": "webpack --config ./config/webpack.config.js"
   },
   "author": {
     "name": "Wren Kitchens"
