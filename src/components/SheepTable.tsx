@@ -18,7 +18,7 @@ const SheepTable = () => {
           {sheep.map((e) => {
             const { branded, id: sheepId, name, sex } = e;
             return (
-              <tr key={`sheep-table-row-${sheepId}`}>
+              <tr key={`sheep-table-row-${sheepId}`} className={branded ? "branded" : ""}>
                 <td>{name}</td>
                 <td>{sex}</td>
                 <td>{branded.toString()}</td>

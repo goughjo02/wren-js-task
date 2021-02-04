@@ -6,7 +6,8 @@ export interface SheepType {
 }
 
 export interface FieldContextType {
-  addSheep: (name: string, sex?:"MALE" | "FEMALE") => void;
+  addSheep: (name: string, sex?: "MALE" | "FEMALE") => void;
+  brandRandomSheep: () => void;
   id: string;
   sheep: SheepType[];
   setSheep: (sheep: SheepType[]) => void;
