@@ -1,14 +1,27 @@
+import {
+  Button,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  TextField,
+} from "@material-ui/core";
 import React, { ChangeEvent, useState } from "react";
 import { useField } from "../contexts/FieldContext";
-import { SEX } from "../types"
+import { SEX } from "../types";
 
 const AddSheep = () => {
   const [name, setName] = useState("");
-  const [sex, setSex] = useState<SEX | undefined>(undefined);
+  const [sex, setSex] = useState<SEX | "random">("random");
   const { addSheep, id, sheep } = useField();
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    addSheep(name ? name : `Sheep ${sheep.length + 1}`, sex);
+    addSheep(
+      name ? name : `Sheep ${sheep.length + 1}`,
+      sex === "random" ? undefined : sex
+    );
+    setName("")
     return false;
   };
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -16,47 +29,52 @@ const AddSheep = () => {
     setName(value);
   };
   const handleSexChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target as { value: SEX };
-    setSex(value ? value : undefined);
+    const { value } = event.target as { value: SEX | "random" };
+    setSex(value);
   };
   return (
-    <div id={`add-sheep-field-${id}`}>
-      <form onSubmit={handleFormSubmit}>
-        <label htmlFor={`new-sheep-name-${id}`}>Name</label>
-        <input
-          value={name}
-          onChange={handleNameChange}
-          id={`new-sheep-name-${id}`}
-          name="newSheepName"
-        />
-        <input
-          type="radio"
-          id={`new-male-sheep-${id}`}
-          name="sex"
-          value={SEX.MALE}
-          checked={sex === SEX.MALE}
-          onChange={handleSexChange}
-        />
-        <label htmlFor={`new-male-sheep-${id}`}>Male</label>
-        <input
-          type="radio"
-          id={`new-female-sheep-${id}`}
-          name="sex"
-          value={SEX.FEMALE}
-          checked={sex === SEX.FEMALE}
-          onChange={handleSexChange}
-        />
-        <label htmlFor={`new-female-sheep-${id}`}>Female</label>
-        <input
-          type="radio"
-          id={`new-random-sex-sheep-${id}`}
-          name="sex"
-          value={undefined}
-          checked={sex === undefined}
-          onChange={handleSexChange}
-        />
-        <label htmlFor={`new-random-sex-sheep-${id}`}>Random</label>
-        <button type="submit">Add Sheep</button>
+    <div id={`add-sheep-field-${id}`} className={`margin-y`}>
+      <h6>Create New Sheep</h6>
+      <form className="column" onSubmit={handleFormSubmit}>
+        <FormControl style={{ marginBottom: "16px" }}>
+          <TextField
+            label="Name"
+            value={name}
+            onChange={handleNameChange}
+            id={`new-sheep-name-${id}`}
+            name="newSheepName"
+          />
+        </FormControl>
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Sex</FormLabel>
+          <RadioGroup
+            aria-label="sex"
+            name="sex"
+            value={sex}
+            onChange={handleSexChange}
+          >
+            <FormControlLabel
+              value={SEX.MALE}
+              control={<Radio />}
+              label="Male"
+            />
+            <FormControlLabel
+              value={SEX.FEMALE}
+              control={<Radio />}
+              label="Female"
+            />
+            <FormControlLabel
+              value={"random"}
+              control={<Radio />}
+              label="Random"
+            />
+          </RadioGroup>
+        </FormControl>
+        <div className="row justify-end margin-y">
+          <Button variant="contained" type="submit" color="primary">
+            Add Sheep
+          </Button>
+        </div>
       </form>
     </div>
   );

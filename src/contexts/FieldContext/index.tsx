@@ -109,7 +109,7 @@ export const FieldProvider: React.FC<{
     } else {
       const { name: newSheepName } = newSheep;
       openSnackbar({
-        message: `${maleName} and ${femaleName} got it no and ${femaleName} became pregnant. They have produced off-spring. ${newSheepName} has just been born.`,
+        message: `${maleName} and ${femaleName} got it on and ${femaleName} became pregnant. They have produced off-spring. ${newSheepName} has just been born.`,
         severity: SNACK_SEVERITY.SUCCESS
       });
       return false;
