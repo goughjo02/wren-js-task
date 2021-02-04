@@ -1,9 +1,10 @@
 import React, { ChangeEvent, useState } from "react";
 import { useField } from "../contexts/FieldContext";
+import { SEX } from "../types"
 
 const AddSheep = () => {
   const [name, setName] = useState("");
-  const [sex, setSex] = useState<"MALE" | "FEMALE" | undefined>(undefined);
+  const [sex, setSex] = useState<SEX | undefined>(undefined);
   const { addSheep, id, sheep } = useField();
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -15,7 +16,7 @@ const AddSheep = () => {
     setName(value);
   };
   const handleSexChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target as { value: "MALE" | "FEMALE" };
+    const { value } = event.target as { value: SEX };
     setSex(value ? value : undefined);
   };
   return (
@@ -32,8 +33,8 @@ const AddSheep = () => {
           type="radio"
           id={`new-male-sheep-${id}`}
           name="sex"
-          value="MALE"
-          checked={sex === "MALE"}
+          value={SEX.MALE}
+          checked={sex === SEX.MALE}
           onChange={handleSexChange}
         />
         <label htmlFor={`new-male-sheep-${id}`}>Male</label>
@@ -41,8 +42,8 @@ const AddSheep = () => {
           type="radio"
           id={`new-female-sheep-${id}`}
           name="sex"
-          value="FEMALE"
-          checked={sex === "FEMALE"}
+          value={SEX.FEMALE}
+          checked={sex === SEX.FEMALE}
           onChange={handleSexChange}
         />
         <label htmlFor={`new-female-sheep-${id}`}>Female</label>

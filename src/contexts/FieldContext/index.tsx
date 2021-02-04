@@ -1,12 +1,12 @@
 import React, { createContext, useContext, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { FieldContextType, FieldType, SheepType } from "../../types";
+import { FieldContextType, FieldType, SheepType, SEX } from "../../types";
 
 export const generateNewSheep = (name: string) => {
   const newSheep: SheepType = {
     id: uuidv4(),
     name,
-    sex: Math.random() < 0.5 ? "MALE" : "FEMALE",
+    sex: Math.random() < 0.5 ? SEX.MALE : SEX.FEMALE,
     branded: false,
   };
   return newSheep;
@@ -28,7 +28,7 @@ export const FieldProvider: React.FC<{
 }> = ({ children, field }) => {
   const { id, sheep: seedSheep } = field;
   const [sheep, setSheep] = useState<SheepType[]>([...seedSheep]);
-  const addSheep = (name: string, sex?: "MALE" | "FEMALE") => {
+  const addSheep = (name: string, sex?: SEX.MALE | SEX.FEMALE) => {
     const newSheep = generateNewSheep(name);
     if (!!sex) {
       newSheep.sex = sex;
