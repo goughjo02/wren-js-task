@@ -26,6 +26,7 @@ const FieldContext = createContext<FieldContextType>({
   id: "",
   sheep: [],
   setSheep: (_) => null,
+  updateSheep: (_) => null,
 });
 
 export const useField = () => useContext(FieldContext);
@@ -43,7 +44,7 @@ export const FieldProvider: React.FC<{
       newSheep.sex = sex;
     }
     setSheep((prevState) => [newSheep, ...prevState]);
-    return newSheep
+    return newSheep;
   };
   const brandRandomSheep = () => {
     setSheep((prevState) => {
@@ -110,10 +111,21 @@ export const FieldProvider: React.FC<{
       const { name: newSheepName } = newSheep;
       openSnackbar({
         message: `${maleName} and ${femaleName} got it on and ${femaleName} became pregnant. They have produced off-spring. ${newSheepName} has just been born.`,
-        severity: SNACK_SEVERITY.SUCCESS
+        severity: SNACK_SEVERITY.SUCCESS,
       });
       return false;
     }
+  };
+  const updateSheep = ({ id, name }: SheepType) => {
+    setSheep((prevState) => {
+      const targetIndex = prevState.findIndex((e) => e.id === id);
+      let newState = [...prevState];
+      let newSheep = { ...newState[targetIndex] };
+      newSheep.name = name;
+      newState[targetIndex] = newSheep
+      return newState;
+    });
+    return false;
   };
   const { Provider } = FieldContext;
   return (
@@ -125,6 +137,7 @@ export const FieldProvider: React.FC<{
         id,
         sheep,
         setSheep,
+        updateSheep,
       }}
     >
       {children}

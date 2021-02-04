@@ -12,6 +12,7 @@ export interface FieldContextType {
   id: string;
   sheep: SheepType[];
   setSheep: (sheep: SheepType[]) => void;
+  updateSheep: (sheep: SheepType) => void;
 }
 
 export interface FieldType {

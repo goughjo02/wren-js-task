@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@types/uuid": "^8.3.0",
     "bootstrap": "^4.3.1",
