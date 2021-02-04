@@ -10,6 +10,7 @@
     "name": "Wren Kitchens"
   },
   "devDependencies": {
+    "@types/material-ui": "^0.21.8",
     "@types/react": "^16.8.8",
     "@types/react-dom": "^16.8.3",
     "css-loader": "^2.1.1",
